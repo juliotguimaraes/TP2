@@ -1,0 +1,32 @@
+#ifndef ARVORESBB_H
+#define ARVORESBB_H
+
+#include "aluno.h"
+
+#define SBB_VERTICAL 0 
+#define SBB_HORIZONTAL 1 
+#define TRUE 1
+#define FALSE 0
+
+typedef struct ArvoreSBB{
+	Aluno *reg;
+	struct ArvoreSBB *esq;
+	struct ArvoreSBB *dir;
+	int esqtipo;
+	int dirtipo;
+}ArvoreSBB;
+
+ArvoreSBB* criaArvoreSBB(Aluno *a);
+void ee(ArvoreSBB **ptr);
+void dd(ArvoreSBB **ptr);
+void ed(ArvoreSBB **ptr);
+void de(ArvoreSBB **ptr);
+void iInsere(Aluno *a, ArvoreSBB** ptr, int *incli, int *fim);
+void iInsereAqui(Aluno *a, ArvoreSBB** ptr, int *incli, int *fim);
+void insereElementoSBB(ArvoreSBB** t, Aluno *n);
+Aluno* pesquisaSBB(ArvoreSBB *t, int x);
+void inicializa(ArvoreSBB **raiz);
+void imprimeArvoreSBB(ArvoreSBB *t, char *saida);
+void apagaArvoreSBB(ArvoreSBB *t);
+
+#endif

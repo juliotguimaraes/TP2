@@ -1,0 +1,68 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include "arvore.h"
+
+Arvore* criaArvore(Aluno *a){
+	Arvore *novo = (Arvore *) malloc(sizeof(Arvore));
+	novo->esq = NULL;
+	novo->dir = NULL;
+	novo->reg = a;
+	
+	return novo;
+}
+
+Aluno* pesquisa(Arvore *t, int x){
+	if(t == NULL){
+		printf("Aluno procurado nao existe\n");
+		return NULL; 
+	}else if(x < t->reg->chave){ //Se o elemento pesquisado é menor do que o elemento, chama a função para a subarvore a esquerda
+		pesquisa(t->esq, x);
+	}else if(x > t->reg->chave){ //Se o elemento pesquisado é maior do que o elemento, chama a função para a subarvore a direita
+		pesquisa(t->dir, x);
+	}else{ //Encontrou o aluno
+		return t->reg;
+	}
+	return t->reg;
+}
+
+void insereElemento(Arvore *t, Aluno *a){
+	if(a->chave < t->reg->chave){
+		if(t->esq != NULL){
+			insereElemento(t->esq, a);
+		}else{
+			Arvore *novo = criaArvore(a);
+			t->esq = novo;
+		}
+	}else{
+		if(t->dir != NULL){
+			insereElemento(t->dir, a);
+		}else{
+			Arvore *novo = criaArvore(a);
+			t->dir = novo;
+		}
+	}
+}
+
+Arvore* achaMenor(Arvore *t){
+	if(t->esq == NULL){
+		return t;
+	}
+	return achaMenor(t->esq);
+}
+
+void imprimeArvore(Arvore *t){
+	if(t != NULL){
+		imprimeArvore(t->esq);
+		imprimeAluno(t->reg);
+		imprimeArvore(t->dir);
+	}
+}
+
+void apagaArvore(Arvore *t){
+	if(t != NULL){
+		apagaArvore(t->esq);
+		apagaArvore(t->dir);
+		apagaAluno(t->reg);
+	}
+}
+

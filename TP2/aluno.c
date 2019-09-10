@@ -1,0 +1,24 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include "aluno.h"
+
+Aluno* criaAluno(char *n, int mat){
+	Aluno *a = (Aluno *) malloc(sizeof(Aluno));
+	a->nome = (char*) malloc(sizeof(char) * strlen(n) + 1);
+	strcpy(a->nome, n);
+	a->chave = mat;
+
+	return a;
+}
+
+void apagaAluno(Aluno *a){
+	free(a->nome);
+	free(a);
+}
+
+void imprimeAluno(Aluno *a, char *saida){
+	FILE *arq = fopen(saida, "a");
+	printf("(%d) %s\n", a->chave, a->nome);
+	fclose(arq);
+}
